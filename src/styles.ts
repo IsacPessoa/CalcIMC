@@ -1,7 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
 export const colors = {
-  beige: '#D8CAB8',
   black: '#1C1C1C',
   white: '#FFFFFF',
   gray: '#EDEDED',

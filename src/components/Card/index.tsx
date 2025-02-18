@@ -9,24 +9,26 @@ const Card = () => {
   const [calculado, setCalculado] = useState<boolean>(false)
 
   const calcularIMC = () => {
-    const pesoNum = parseFloat(peso)
-    const alturaNum = parseFloat(altura)
+    const pesoNum = peso.trim() !== '' ? parseFloat(peso) : NaN
+    const alturaNum = altura.trim() !== '' ? parseFloat(altura) : NaN
 
     if (!isNaN(pesoNum) && !isNaN(alturaNum) && pesoNum > 0 && alturaNum > 0) {
-      const alturaMetros = alturaNum / 100
-      const imcCalc = pesoNum / (alturaMetros * alturaMetros)
+      const alturaM = alturaNum / 100
+      const imcCalc = pesoNum / (alturaM * alturaM)
       setImc(imcCalc)
       setCalculado(true)
 
-      if (imcCalc < 18.5) {
+      const imcArredondado = Math.round(imcCalc * 100) / 100
+
+      if (imcArredondado < 18.5) {
         setResultado('Abaixo do peso')
-      } else if (imcCalc >= 18.5 && imcCalc < 24.9) {
+      } else if (imcArredondado >= 18.5 && imcArredondado < 24.9) {
         setResultado('Peso normal')
-      } else if (imcCalc >= 25 && imcCalc < 29.9) {
+      } else if (imcArredondado >= 25 && imcArredondado < 29.9) {
         setResultado('Sobrepeso')
-      } else if (imcCalc >= 30 && imcCalc < 34.9) {
+      } else if (imcArredondado >= 30 && imcArredondado < 34.9) {
         setResultado('Obesidade grau 1')
-      } else if (imcCalc >= 35 && imcCalc < 39.9) {
+      } else if (imcArredondado >= 35 && imcArredondado < 39.9) {
         setResultado('Obesidade grau 2')
       } else {
         setResultado('Obesidade grau 3')
